@@ -18,8 +18,8 @@ public class WeatherApplication /*extends SpringBootServletInitializer*/ {
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(WeatherApplication.class, args);
 
-        Query asd = YahooWeatherForecastService.getInstance().makeQuery("ls");
-        System.out.println(asd.toString());
+        /*Query asd = YahooWeatherForecastService.getInstance().makeQuery("ls");
+        System.out.println(asd.toString());*/
 
 		//accountRepository.save(new Account("rbaxter", "password"));
 	}

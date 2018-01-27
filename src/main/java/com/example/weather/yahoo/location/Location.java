@@ -1,38 +1,25 @@
 package com.example.weather.yahoo.location;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "name",
+        "woe"
+})
 public class Location {
 
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("woe")
     private String woe;
 
-    public Location(String name, String woe) {
-        this.name = name;
-        this.woe = woe;
-    }
-
-    //Overrides
-    @Override
-    public String toString() {
-        return "Location{" +
-                "name='" + name + '\'' +
-                ", woe='" + woe + '\'' +
-                '}';
-    }
-
-    //Getters & Setters
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getWoe() {
-        return woe;
-    }
-
-    public void setWoe(String woe) {
-        this.woe = woe;
-    }
 }

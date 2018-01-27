@@ -29,7 +29,7 @@ private String lang;
 @JsonProperty("results")
 private Results results;
 @JsonIgnore
-private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+private Map<String, Query> additionalProperties = new HashMap<String, Query>();
 
 @JsonProperty("count")
 public Integer getCount() {
@@ -72,12 +72,12 @@ this.results = results;
 }
 
 @JsonAnyGetter
-public Map<String, Object> getAdditionalProperties() {
+public Map<String, Query> getAdditionalProperties() {
 return this.additionalProperties;
 }
 
 @JsonAnySetter
-public void setAdditionalProperty(String name, Object value) {
+public void setAdditionalProperty(String name, Query value) {
 this.additionalProperties.put(name, value);
 }
 
