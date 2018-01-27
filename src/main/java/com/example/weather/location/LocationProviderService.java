@@ -25,7 +25,7 @@ public class LocationProviderService {
     }
 
     /**
-     * Get all possible weather locations by querying Yahoo's services alphabetically.
+     * Get (almost all? a lot of?) possible weather locations by querying Yahoo's services alphabetically.
      * <p>
      * This method was made by reverse-engineering how the site 'https://login.yahoo.com/account/preferences' operates,
      * by checking the ajax calls made in the background using the browser's debugging tools.
@@ -35,7 +35,7 @@ public class LocationProviderService {
      *
      * @apiNote Since this implementation makes a GET call for every letter in the alphabet, the performance is terrible.
      * It should be deprecated and replaced for a more direct approach (a single API call that retrieves all possible
-     * weather locations perhaps) whenever one is found.
+     * weather locations perhaps), whenever one is found.
      */
     public Set<Location> getLocations() {
 
