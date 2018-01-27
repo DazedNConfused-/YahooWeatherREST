@@ -1,4 +1,4 @@
-package com.example.weather.location;
+package com.example.weather.yahoo.location;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

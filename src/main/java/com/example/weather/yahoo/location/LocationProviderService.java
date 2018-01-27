@@ -1,4 +1,4 @@
-package com.example.weather.location;
+package com.example.weather.yahoo.location;
 
 import java.util.Comparator;
 import java.util.Set;

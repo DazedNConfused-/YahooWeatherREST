@@ -30,6 +30,8 @@ class MainController {
         return ResponseEntity.ok().build();
     }
 
+
+
     /* ACCOUNT MANAGEMENT */
 
     @RequestMapping(path = "/account/add", method = RequestMethod.POST)

@@ -1,4 +1,4 @@
-package com.example.weather.location;
+package com.example.weather.yahoo.location;
 
 public class Location {
 
