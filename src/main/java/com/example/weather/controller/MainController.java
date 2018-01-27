@@ -28,9 +28,6 @@ class MainController {
     @Autowired
     private AccountRepository accountRepository;
 
-    @Autowired
-    private AuthenticationManagerBuilder authManager;
-
     MainController() {
     }
 
@@ -112,6 +109,8 @@ class MainController {
 
         LOGGER.debug("Account doesn't already exist. Creating...");
         accountRepository.save(input);
+
+
 
         //authManager.inMemoryAuthentication().withUser(input.getUsername()).password(input.getPassword()).roles(input.getRole());
 
