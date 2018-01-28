@@ -1,0 +1,3 @@
+CREATE USER 'weather'@'%' IDENTIFIED BY 'weather2033';
+CREATE DATABASE IF NOT EXISTS DB_YahooWeatherREST;
+GRANT ALL PRIVILEGES ON DB_YahooWeatherREST.* TO 'weather'@'%';
