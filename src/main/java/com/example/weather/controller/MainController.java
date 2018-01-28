@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -33,22 +35,20 @@ class MainController {
     MainController() {
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    String readBookmarks(@PathVariable String currentUser) {
-        return "Hello World " + currentUser + "!";
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<?> add(@PathVariable String currentUser, @RequestBody Atmosphere input) {
-        System.out.println(input.toString());
-        return ResponseEntity.ok().build();
-    }
-
     // WEATHER QUERYING SERVICES
     // =================================================================================================================
 
     @RequestMapping(path = "/{currentUser}", method = RequestMethod.GET)
-    ResponseEntity<?> userDashboard(@PathVariable String currentUser) {
+    ResponseEntity<?> userDashboard(@PathVariable String currentUser, Authentication authentication) {
+
+        //Check if {currentUser} matches given Security Credentials
+        String currentPrincipalName = authentication.getName();
+
+        if(!currentPrincipalName.equals(currentUser)){
+            LOGGER.error("Accessed User does not match given credentials! Aborting...");
+            return ResponseEntity.badRequest().build();
+        }
+
         LOGGER.info("User {} has accessed the dashboard", currentUser);
 
         ArrayList queryResults = new ArrayList();
@@ -85,7 +85,16 @@ class MainController {
     // =================================================================================================================
 
     @RequestMapping(path = "/{currentUser}/subscription/location", method = RequestMethod.POST)
-    ResponseEntity<?> locationAdd(@PathVariable String currentUser, @RequestBody Location input) {
+    ResponseEntity<?> locationAdd(@PathVariable String currentUser, @RequestBody Location input, Authentication authentication) {
+
+        //Check if {currentUser} matches given Security Credentials
+        String currentPrincipalName = authentication.getName();
+
+        if(!currentPrincipalName.equals(currentUser)){
+            LOGGER.error("Accessed User does not match given credentials! Aborting...");
+            return ResponseEntity.badRequest().build();
+        }
+
         LOGGER.info("User {} has requested for locations to be added to his account", currentUser);
 
         //First check if requested account exists
@@ -127,7 +136,16 @@ class MainController {
     }
 
     @RequestMapping(path = "/{currentUser}/subscription/location", method = RequestMethod.DELETE)
-    ResponseEntity<?> locationDelete(@PathVariable String currentUser, @RequestBody Location input) {
+    ResponseEntity<?> locationDelete(@PathVariable String currentUser, @RequestBody Location input, Authentication authentication) {
+
+        //Check if {currentUser} matches given Security Credentials
+        String currentPrincipalName = authentication.getName();
+
+        if(!currentPrincipalName.equals(currentUser)){
+            LOGGER.error("Accessed User does not match given credentials! Aborting...");
+            return ResponseEntity.badRequest().build();
+        }
+
         LOGGER.info("User {} has requested for locations to be deleted from his account", currentUser);
 
         //First check if requested account exists
@@ -147,8 +165,17 @@ class MainController {
     // ACCOUNT MANAGEMENT SERVICES
     // =================================================================================================================
 
-    @RequestMapping(path = "/{currentUser}/account/add", method = RequestMethod.POST)
-    ResponseEntity<?> accountAdd(@PathVariable String currentUser, @RequestBody Account input) throws Exception {
+    @RequestMapping(path = "/{currentUser}/account", method = RequestMethod.POST)
+    ResponseEntity<?> accountAdd(@PathVariable String currentUser, @RequestBody Account input, Authentication authentication) {
+
+        //Check if {currentUser} matches given Security Credentials
+        String currentPrincipalName = authentication.getName();
+
+        if(!currentPrincipalName.equals(currentUser)){
+            LOGGER.error("Accessed User does not match given credentials! Aborting...");
+            return ResponseEntity.badRequest().build();
+        }
+
         LOGGER.info("User {} attempts to create account [{}]", currentUser, input);
 
         if(accountRepository.findByUsername(input.getUsername()) != null){
