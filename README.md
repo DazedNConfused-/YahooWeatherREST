@@ -60,7 +60,7 @@ http://<IP>:8081/dashboard/<user>
 - Retrieves all weather info for the `<user>`'s subscribed locations.
 - If the `<user>` is not subscribed to any locations, an empty JSON is returned.
 
-**Example**: The user is subscribed to a single location: Buenos Aires.
+**Example** The user is subscribed to a single location: Buenos Aires.
 
 ```
 [
@@ -224,8 +224,8 @@ http://<IP>:8081/dashboard/<user>/subscription/location
     - A location is validated against Yahoo's Weather services before
       being considered valid or not. A location that yields no result
       from Yahoo's API is considered invalid.
-- A `DELETE` request removes a location to the `<user>`'s location
-  subscription.
+- A `DELETE` request removes a location from the `<user>`'s location
+  subscription list.
   - Attempts to remove a non-existent location will result in a `404 :
     NOT FOUND` error.
 - If the `<user>` is not subscribed to any locations, an empty JSON is returned.
@@ -244,7 +244,7 @@ http://<IP>:8081/dashboard/<user>/account
 ```
 
 - A `POST` request creates a new user account within the application. It
-  won't have any associated locations yet, they must be assigned calling
+  won't have any associated locations yet, they must be assigned by calling
   the corresponding API routes.
   - Attempts to add an already existing account (meaning, the username
     already exists in the database) will result in a `409 : CONFLICT`
@@ -261,7 +261,7 @@ The following are potential desirable upgrades that could be done to improve the
 
 - [ ] Separate Entities from POJOs.
 - [ ] Implement Servlet and Views (that consume the REST's API data), in
-      order to provide a GUI to a user that access the application from
+      order to provide a GUI to a user that accesses the application from
       a browser.
 
 ## Licence
